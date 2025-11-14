@@ -62,7 +62,24 @@
   <div id="accessSection">
     <p id="fileDisplay"></p> <!-- NEW filename display -->
     <h2>Enter Access Code</h2>
-    <input type="password" id="codeInput" placeholder="Enter code here" />
+    <div style="position:relative; display:inline-block;">
+      <input type="password" id="codeInput" placeholder="Enter code here"
+        style="padding-right:45px;">
+    
+      <span id="toggleEye"
+        style="
+          position:absolute;
+          right:12px;
+          top:50%;
+          transform:translateY(-50%);
+          cursor:pointer;
+          font-size:20px;
+          color:#9fe3ff;
+          user-select:none;
+        "
+      >👁️</span>
+    </div>
+    
     <br>
     <button type="button" id="accessSubmit" style="padding:10px 40px; font-size:20px;">Login</button>
 
@@ -158,6 +175,20 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+    // ===== SHOW / HIDE PASSWORD TOGGLE =====
+    const toggleEye = document.getElementById("toggleEye");
+  const codeInputEye = document.getElementById("codeInput");
+
+  toggleEye.addEventListener("click", () => {
+    if (codeInputEye.type === "password") {
+      codeInputEye.type = "text";
+      toggleEye.textContent = "🙈"; // hide icon
+    } else {
+      codeInputEye.type = "password";
+      toggleEye.textContent = "👁️"; // show icon
+    }
+  });
+
   // ===== Display filename on login page =====
   const quizTitleEl = document.querySelector("#quizSection h1");
   const displayFileName = quizTitleEl ? quizTitleEl.textContent.replace("Quiz: ", "").trim() : "index.html";
@@ -644,6 +675,3 @@ if (contactSubmit) {
 </script>
 </body>
 </html>
-
-
-
